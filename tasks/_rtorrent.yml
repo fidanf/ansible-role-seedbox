@@ -47,6 +47,6 @@
 
 - name: Wait for SCGI port
   wait_for:
-    port: "{{ rtorrent_network_scgi_open_port }}"
+    port: "{{ rtorrent_rc.network_scgi_open_port }}"
     delay: 5
     timeout: 30

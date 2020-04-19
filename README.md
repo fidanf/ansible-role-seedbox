@@ -21,7 +21,10 @@ Role Variables
 ```yaml
 # rtorrent
 rtorrent_user_password: $6$.uRzBMvRZ/Xz$cQCZlmI1JdYrH/uAGsyywypam2wWBAVNB6TqCi8wnFJpiG2UmBZ0FyDbmEdLsziQUaAsAyH8dn3Yxwue1LCL// # rtorrent
-rtorrent_network_scgi_open_port: 5001
+rtorrent_rc: {
+  network_scgi_open_port: 5001,
+  pieces_memory_max_set: 1800M
+}
 
 # flood
 flood_repo: git@github.com:Flood-UI/flood.git
