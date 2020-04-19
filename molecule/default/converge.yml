@@ -4,7 +4,11 @@
   become: yes
   gather_facts: yes
   remote_user: root
-  
+
+  vars:
+    TRAVIS_PATH: "{{ lookup('env', 'TRAVIS_BUILD_DIR') }}"
+    VAGRANT_PATH: "{{ lookup('env', 'HOME') }}/ansible-role-seedbox"
+
   pre_tasks:
     - name: Update apt cache.
       apt: update_cache=true cache_valid_time=600
@@ -14,8 +18,8 @@
     - name: geerlingguy.nodejs
       vars: 
         nodejs_version: 10.x
-        npm_config_unsafe_perm: true
+        npm_config_unsafe_perm: false
         nodejs_npm_global_packages:
           - node-gyp
       tags: ['dependencies']
-    - name: "{{ lookup('env', 'TRAVIS_BUILD_DIR') }}"
+    - name: "{{ TRAVIS_PATH if TRAVIS_PATH else VAGRANT_PATH }}"
