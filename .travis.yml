@@ -16,8 +16,8 @@ install:
 script:
   - ansible-galaxy install geerlingguy.nodejs
   - cd tests/
-  - ansible-playbook test.yml -i ./inventory --syntax-check
-  - ansible-playbook test.yml -i ./inventory -vv
+  - ansible-playbook test.yml --syntax-check
+  - ansible-playbook test.yml -vv
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/

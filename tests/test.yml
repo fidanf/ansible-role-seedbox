@@ -11,4 +11,4 @@
           - pm2
           - node-gyp
       tags: ['dependencies']
-    - name: ../ansible-role-seedbox
+    - name: "{{ lookup('env', 'TRAVIS_BUILD_DIR') }}/ansible-role-seedbox"
