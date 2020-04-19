@@ -1,8 +1,11 @@
 ---
-- name: Ensure group "www-data" exists
+- name: rtorrent | Ensure required groups are present
   group:
-    name: www-data
+    name: "{{ item }}"
     state: present
+  loop:
+    - rtorrent
+    - www-data
 
 - name: rtorrent | Create rtorrent user
   user:
@@ -27,7 +30,7 @@
     src: .rtorrent.rc.j2
     dest: /home/rtorrent/.rtorrent.rc
     owner: rtorrent
-    group: rtorrent
+    group: www-data
     mode: 0775
 
 - name: rtorrent | Copy systemd unit
