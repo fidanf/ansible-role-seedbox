@@ -1,0 +1,17 @@
+[Unit]
+Description=Flood
+After=network.target
+
+[Service]
+User=rtorrent
+Group=rtorrent
+ExecStart=/usr/bin/npm start
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=notell
+Environment=NODE_ENV=production
+WorkingDirectory={{ flood_directory }}
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

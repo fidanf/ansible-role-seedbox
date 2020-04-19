@@ -1,0 +1,10 @@
+---
+- name: restart flood
+  service:
+    name: flood
+    state: restarted
+
+- name: reload nginx
+  service:
+    name: nginx
+    state: reloaded

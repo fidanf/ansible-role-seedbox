@@ -1,0 +1,12 @@
+---
+- import_tasks: _apt.yml
+  tags: ['apt']
+
+- import_tasks: _rtorrent.yml
+  tags: ['rtorrent']
+
+- import_tasks: _flood.yml
+  tags: ['flood']
+
+- import_tasks: _nginx.yml
+  tags: ['nginx']

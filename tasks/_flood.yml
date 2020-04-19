@@ -1,0 +1,57 @@
+---
+- name: flood | Clone flood project using git
+  git:
+    repo: "{{ flood_repo }}"
+    dest: "{{ flood_directory }}"
+    version: "{{ flood_revision }}"
+    update: no
+
+- name: flood | Update permissions
+  file:
+    path: "{{ flood_directory }}"
+    state: directory
+    recurse: yes
+    owner: rtorrent
+    group: www-data
+    mode: 0775    
+
+- name: flood | Copy flood configuration file
+  copy:
+    src: "{{ flood_directory }}/config.template.js"
+    dest: "{{ flood_directory }}/config.js"
+    remote_src: yes
+    owner: rtorrent
+    group: www-data
+
+- name: flood | Install Npm dependencies
+  npm:
+    ci: yes
+    production: yes
+    path: "{{ flood_directory }}"
+  become_user: rtorrent
+
+- name: flood | Build using npm
+  shell: npm run build
+  args:
+    chdir: "{{ flood_directory }}"
+    warn: no
+  become_user: rtorrent
+
+- name: flood | Copy systemd unit
+  template:
+    src: flood.service.j2
+    dest: /etc/systemd/system/flood.service
+  notify: restart flood
+
+- name: flood | Enable and start service
+  systemd:
+    name: flood
+    enabled: yes
+    daemon_reload: yes
+    state: started
+
+- name: Wait for flood server port
+  wait_for:
+    port: "{{ flood_config_server_port }}"
+    delay: 5
+    timeout: 30

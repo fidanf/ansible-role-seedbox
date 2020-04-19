@@ -1,0 +1,19 @@
+{{ ansible_managed | comment }}
+upstream flood {
+  server 127.0.0.1:{{ flood_config_server_port }};
+}
+
+server {
+    listen 80;
+    server_name ~.*;
+
+    location / {
+        proxy_pass http://flood;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+    }
+
+    access_log /var/log/nginx/flood.log;
+    error_log /var/log/nginx/flood.log;
+}

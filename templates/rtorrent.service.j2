@@ -1,0 +1,13 @@
+[Unit]
+Description=rTorrent
+After=network.target
+
+[Service]
+User=rtorrent
+Type=forking
+KillMode=none
+ExecStart=/usr/bin/screen -L -Logfile /home/rtorrent/screen.log -d -m -fa -S rtorrent /usr/bin/rtorrent
+ExecStop=/usr/bin/killall -w -s 2 /usr/bin/rtorrent
+
+[Install]
+WantedBy=default.target

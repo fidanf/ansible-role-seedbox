@@ -1,0 +1,17 @@
+---
+- name: nginx | Install package
+  apt:
+    name: nginx
+    state: present
+
+- name: nginx | Copy vhost file
+  template:
+    src: flood-proxy.conf.j2
+    dest: /etc/nginx/sites-available/flood-proxy.conf
+  notify: reload nginx
+
+- name: nginx | Activate vhost
+  file:
+    src: /etc/nginx/sites-available/flood-proxy.conf
+    dest: /etc/nginx/sites-enabled/flood-proxy.conf
+    state: link

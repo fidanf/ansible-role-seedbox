@@ -1,0 +1,11 @@
+---
+# rtorrent
+rtorrent_user_password: $6$.uRzBMvRZ/Xz$cQCZlmI1JdYrH/uAGsyywypam2wWBAVNB6TqCi8wnFJpiG2UmBZ0FyDbmEdLsziQUaAsAyH8dn3Yxwue1LCL// # rtorrent
+rtorrent_network_scgi_open_port: 5001
+
+# flood
+flood_repo: https://github.com/Flood-UI/flood.git
+flood_revision: master
+flood_directory: /var/www/flood
+flood_config_secret: s3cr3t
+flood_config_server_port: 3000

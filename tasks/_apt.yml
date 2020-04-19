@@ -1,0 +1,20 @@
+---
+- name: apt | install dependencies
+  apt:
+    name: "{{ apt_pkgs }}"
+    state: present
+    update_cache: yes
+  vars:
+    apt_pkgs:
+      - git
+      - curl
+      - wget
+      - vim
+      - rtorrent
+      - screen
+      - whois
+      - software-properties-common
+      - apt-transport-https
+      - make
+      - python-apt
+      - psmisc

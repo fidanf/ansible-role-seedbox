@@ -1,0 +1,61 @@
+# This is an example resource file for rTorrent. Copy to ~/.rtorrent.rc and enable/modify the options as needed. Remember to uncomment the options you wish to enable.
+{{ ansible_managed | comment }}
+
+### Directories
+directory = /home/rtorrent/download
+session = /home/rtorrent/.session
+
+### BitTorrent
+# Global upload and download rate in KiB, `0` for unlimited
+throttle.global_down.max_rate.set = 0
+throttle.global_up.max_rate.set = 0
+
+# Maximum number of simultaneous downloads and uploads slots
+throttle.max_downloads.global.set = 150
+throttle.max_uploads.global.set = 150
+
+# Maximum and minimum number of peers to connect to per torrent while downloading
+throttle.min_peers.normal.set = 30
+throttle.max_peers.normal.set = 150
+
+# Same as above but for seeding completed torrents (seeds per torrent)
+throttle.min_peers.seed.set = -1
+throttle.max_peers.seed.set = -1
+
+### Networking
+network.port_range.set = 51001-51250
+network.port_random.set = yes
+dht.mode.set = disable
+protocol.pex.set = no
+trackers.use_udp.set = yes
+
+network.scgi.open_port = 127.0.0.1:{{rtorrent_network_scgi_open_port}}
+network.http.ssl_verify_peer.set = 0
+protocol.encryption.set = allow_incoming,enable_retry,prefer_plaintext
+
+network.max_open_files.set = 4096
+network.max_open_sockets.set = 1536
+network.http.max_open.set = 48
+network.send_buffer.size.set = 4M
+network.receive_buffer.size.set = 4M
+
+### Memory
+pieces.hash.on_completion.set = no
+pieces.preload.type.set = 1
+pieces.memory.max.set = 3500M
+
+### Logging
+log.open_file = "rtorrent", /home/rtorrent/logs/rtorrent.log
+log.open_file = "tracker", /home/rtorrent/logs/tracker.log
+log.open_file = "storage", /home/rtorrent/logs/storage.log
+
+log.add_output = "info", "rtorrent"
+log.add_output = "critical", "rtorrent"
+log.add_output = "error", "rtorrent"
+log.add_output = "warn", "rtorrent"
+log.add_output = "notice", "rtorrent"
+log.add_output = "debug", "rtorrent"
+
+#log.add_output = "dht_debug", "tracker"
+#log.add_output = "tracker_debug", "tracker"
+#log.add_output = "storage_debug", "storage"
