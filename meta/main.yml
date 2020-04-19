@@ -1,3 +1,4 @@
+---
 galaxy_info:
   author: Frank Fidanza
   description: Installs rtorrent along with Flood web client on Debian/Ubuntu
@@ -8,10 +9,8 @@ galaxy_info:
     - name: Debian
       versions:
         - buster
-        - stretch
     - name: Ubuntu
       versions:
-        - xenial
         - bionic
 
   galaxy_tags:
