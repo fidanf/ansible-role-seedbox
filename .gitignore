@@ -1,4 +1,4 @@
 inventory
-!tests/inventory
 playbook.yml
 ansible.cfg
+!tests/*
