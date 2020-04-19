@@ -1,11 +1,15 @@
 Ansible Role: Seedbox
 =========
 
-[![Build Status](https://travis-ci.com/fidanf/ansible-role-seedbox.svg?token=TxS758xPUhfKg4AsN4sM&branch=master)](https://travis-ci.com/fidanf/ansible-role-seedbox)
+[![Build Status](https://travis-ci.com/fidanf/ansible-role-seedbox.svg?branch=master)](https://travis-ci.com/fidanf/ansible-role-seedbox)
 
 Installs [rtorrent](https://github.com/rakshasa/rtorrent) along with [Flood](https://github.com/Flood-UI/flood) web client on Debian/Ubuntu.
 By default Flood will run on port 80 served by Nginx configured as a reverse-proxy.
 
+Tested with :
+- Debian 10.x :heavy_check_mark:
+- Ubuntu 18.04.x :heavy_check_mark:
+ 
 Requirements
 ------------
 
