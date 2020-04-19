@@ -14,6 +14,7 @@ install:
   - ansible --version
 
 script:
+  - ansible-galaxy install geerlingguy.nodejs
   - ansible-playbook tests/test.yml -i tests/inventory --syntax-check
   - ansible-playbook tests/test.yml -i tests/inventory -vv
 

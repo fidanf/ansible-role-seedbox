@@ -1,0 +1,1 @@
+travis  ansible_user=root   ansible_host=localhost
