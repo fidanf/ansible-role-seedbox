@@ -18,4 +18,4 @@
         nodejs_npm_global_packages:
           - node-gyp
       tags: ['dependencies']
-    - name: "{{ lookup('env', 'HOME') }}/ansible-role-seedbox"
+    - name: "{{ lookup('env', 'TRAVIS_BUILD_DIR') }}"
