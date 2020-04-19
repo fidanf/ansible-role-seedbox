@@ -45,11 +45,9 @@ Example Playbook
   roles:
     - name: geerlingguy.nodejs
       vars: 
-        nodejs_version: "10.x"
-        npm_config_prefix: "/usr/local/lib/npm"
-        npm_config_unsafe_perm: "false"
+        nodejs_version: 10.x
+        npm_config_unsafe_perm: true
         nodejs_npm_global_packages:
-          - pm2
           - node-gyp
 
     - name: fidanf.seedbox
