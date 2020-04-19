@@ -10,7 +10,7 @@ env:
     - MOLECULE_DISTRO: ubuntu1804
 
 install:
-  - pip install molecule yamllint docker
+  - pip install molecule yamllint docker ansible-lint
 
 script:
   - molecule test

@@ -1,0 +1,8 @@
+use_default_rules: true
+skip_list:
+  - '501'
+  - '305'
+  - '301'
+  - '204'
+  - '201'
+verbosity: 1
