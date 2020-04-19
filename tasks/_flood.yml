@@ -14,6 +14,7 @@
     owner: rtorrent
     group: www-data
     mode: 0775    
+  tags: ['molecule-idempotence-notest']
 
 - name: flood | Copy flood configuration file
   copy:
@@ -29,6 +30,7 @@
     production: yes
     path: "{{ flood_directory }}"
   become_user: rtorrent
+  tags: ['molecule-idempotence-notest']
 
 - name: flood | Build using npm
   shell: npm run build
@@ -36,6 +38,7 @@
     chdir: "{{ flood_directory }}"
     warn: no
   become_user: rtorrent
+  tags: ['molecule-idempotence-notest']
 
 - name: flood | Copy systemd unit
   template:
