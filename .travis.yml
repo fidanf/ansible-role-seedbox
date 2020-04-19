@@ -1,23 +1,19 @@
 ---
 language: python
-python: "2.7"
+services: docker
 
-sudo: false
-
-addons:
-  apt:
-    packages:
-      - python-pip
+env:
+  global:
+    - ROLE_NAME: seedbox
+  matrix:
+    - MOLECULE_DISTRO: debian10
+    - MOLECULE_DISTRO: ubuntu1804
 
 install:
-  - pip install ansible
-  - ansible --version
+  - pip install molecule yamllint docker
 
 script:
-  - ansible-galaxy install geerlingguy.nodejs
-  - cd tests/
-  - ansible-playbook test.yml --syntax-check
-  - ansible-playbook test.yml -vv
+  - molecule test
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/

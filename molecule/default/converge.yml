@@ -1,0 +1,21 @@
+---
+- name: Converge
+  hosts: all
+  become: yes
+  gather_facts: yes
+  remote_user: root
+  
+  pre_tasks:
+    - name: Update apt cache.
+      apt: update_cache=true cache_valid_time=600
+      when: ansible_os_family == 'Debian'
+
+  roles:
+    - name: geerlingguy.nodejs
+      vars: 
+        nodejs_version: 10.x
+        npm_config_unsafe_perm: true
+        nodejs_npm_global_packages:
+          - node-gyp
+      tags: ['dependencies']
+    - name: "{{ lookup('env', 'HOME') }}/ansible-role-seedbox"
