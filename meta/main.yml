@@ -1,5 +1,6 @@
 ---
 galaxy_info:
+  role_name: seedbox 
   author: Frank Fidanza
   description: Installs rtorrent along with Flood web client on Debian/Ubuntu
   license: "license (BSD, MIT)"
