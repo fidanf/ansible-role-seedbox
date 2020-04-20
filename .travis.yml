@@ -7,7 +7,6 @@ env:
     - ROLE_NAME: seedbox
   matrix:
     - MOLECULE_DISTRO: debian10
-    - MOLECULE_DISTRO: debian9
     - MOLECULE_DISTRO: ubuntu2004
     - MOLECULE_DISTRO: ubuntu1804
 
