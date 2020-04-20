@@ -8,6 +8,8 @@ By default Flood will run on port 80 served by Nginx configured as a reverse-pro
 
 Tested with :
 - Debian 10.x :heavy_check_mark:
+- Debian 9.x :heavy_check_mark:
+- Ubuntu 20.04.x :heavy_check_mark:
 - Ubuntu 18.04.x :heavy_check_mark:
  
 Requirements
