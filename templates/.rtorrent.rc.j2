@@ -24,40 +24,39 @@ execute.throw = sh, -c, (cat,\
     "\"",(cfg.watch),"/start\" ")
 
 ## Listening port for incoming peer traffic (fixed; you can also randomize it)
-network.port_range.set = 50000-50000
-network.port_random.set = no
+network.port_range.set = {{ rtorrent_port_range }}
+network.port_random.set = {{ rtorrent_port_random|ternary('yes', 'no') }}
 
 ## Tracker-less torrent and UDP tracker support
 ## (conservative settings for 'private' trackers, change for 'public')
-dht.mode.set = disable
-protocol.pex.set = no
-
-trackers.use_udp.set = no
+dht.mode.set = {{ rtorrent_dht_mode }}
+protocol.pex.set = {{ rtorrent_protocol_pex|ternary('yes', 'no') }}
+trackers.use_udp.set = {{ rtorrent_trackers_use_udp|ternary('yes', 'no') }}
 
 ## Peer settings
-throttle.max_uploads.set = 100
-throttle.max_uploads.global.set = 250
-throttle.min_peers.normal.set = 20
-throttle.max_peers.normal.set = 60
-throttle.min_peers.seed.set = 30
-throttle.max_peers.seed.set = 80
-trackers.numwant.set = 80
+throttle.max_uploads.set = {{ rtorrent_throttle_max_uploads }}
+throttle.max_uploads.global.set = {{ rtorrent_throttle_max_uploads_global }}
+throttle.min_peers.normal.set = {{ rtorrent_throttle_min_peers_normal }}
+throttle.max_peers.normal.set = {{ rtorrent_throttle_max_peers_normal }}
+throttle.min_peers.seed.set = {{ rtorrent_throttle_min_peers_seed }}
+throttle.max_peers.seed.set = {{ rtorrent_throttle_max_peers_seed }}
+trackers.numwant.set = {{ rtorrent_trackers_numwant }}
 
-protocol.encryption.set = allow_incoming,try_outgoing,enable_retry
+protocol.encryption.set = {{ rtorrent_protocol_encryption_set }}
 
 ## Limits for file handle resources, this is optimized for
 ## an `ulimit` of 1024 (a common default). You MUST leave
 ## a ceiling of handles reserved for rTorrent's internal needs!
-network.max_open_files.set = 4096
-network.max_open_sockets.set = 1536
-network.http.max_open.set = 48
-network.send_buffer.size.set = 4M
-network.receive_buffer.size.set = 4M
+network.max_open_files.set = {{ rtorrent_network_max_open_files }}
+network.max_open_sockets.set = {{ rtorrent_network_max_open_sockets }}
+network.http.max_open.set = {{ rtorrent_network_http_max_open }}
+network.send_buffer.size.set = {{ rtorrent_network_send_buffer_size }}
+network.receive_buffer.size.set = {{ rtorrent_network_receive_buffer_size }}
 
 ## Memory resource usage (increase if you have a large number of items loaded,
 ## and/or the available resources to spend)
-pieces.memory.max.set = {{rtorrent_rc.pieces_memory_max_set}}
-network.xmlrpc.size_limit.set = 4M
+pieces.memory.max.set = {{ rtorrent_pieces_memory_max_set }}
+network.xmlrpc.size_limit.set = {{ rtorrent_network_xmlrpc_size_limit_set }}
 
 ## Basic operational settings (no need to change these)
 session.path.set = (cat, (cfg.session))
@@ -98,7 +97,7 @@ schedule2 = watch_start, 10, 10, ((load.start_verbose, (cat, (cfg.watch), "start
 # Use a IP socket with scgi_port, or a Unix socket with scgi_local.
 # schedule can be used to set permissions on the unix socket.
 #
-network.scgi.open_port = "127.0.0.1:{{rtorrent_rc.network_scgi_open_port}}"
+network.scgi.open_port = "127.0.0.1:{{ rtorrent_network_scgi_open_port }}"
 #network.scgi.open_local = (cat,(session.path),/rpc.sock)
 #schedule2 = socket_chmod, 0, 0, "execute.nothrow=chmod,770,(cat,(session.path),/rpc.sock)"
 

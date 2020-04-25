@@ -5,7 +5,7 @@ upstream flood {
 
 server {
     listen 80;
-    server_name ~.*;
+    server_name {{ nginx_server_name }};
 
     location / {
         proxy_pass http://flood;
